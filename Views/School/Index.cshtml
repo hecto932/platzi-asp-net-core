@@ -3,12 +3,18 @@
 <!-- Codigo CSHARP -->
 @{
     ViewData["Title"] = "School information";
-    Layout = "_Layout";
+    Layout = "Simple";
 }
 
 <div class="text-center">
-  <h1 class="display-4">School</h1>
-  <h2>Name: @Model.Name
-  </h2>
+  <h1 class="display-4">School - @ViewData["Title"]</h1>
+  <h2>Name: @Model.Name</h2>
+  <h3>TypeSchool: @Model.TypeSchool</h3>
+  <address>
+    <p>Address: @Model.Address</p>
+    <p>Country: @Model.Country</p>
+    <p>City: @Model.City</p>
+  </address>
   <p><strong>foundation year: @Model.foundationYear</strong> </p>
+  <p>@ViewBag.dynamicThing</p>
 </div>

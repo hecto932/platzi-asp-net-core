@@ -4,16 +4,23 @@ using platzi_asp_net_core.Models;
 
 namespace platzi_asp_net_core.Controllers
 {
-    public class SchoolController: Controller
+  public class SchoolController : Controller
+  {
+    public IActionResult Index()
     {
-        public IActionResult Index() {
-            var school = new School();
-            
-            school.foundationYear = 2005;
-            school.SchoolId = Guid.NewGuid().ToString();
-            school.Name = "Platzi";
+      var school = new School();
 
-            return View(school);
-        }
+      school.foundationYear = 2005;
+      school.UniqueId = Guid.NewGuid().ToString();
+      school.Name = "Platzi";
+      school.City = "Bogota";
+      school.Country = "Colombia";
+      school.Address = "Carrera 1";
+      school.TypeSchool = TypeSchool.Secondary;
+
+      ViewBag.dynamicThing = "La Monja";
+
+      return View(school);
     }
+  }
 }
