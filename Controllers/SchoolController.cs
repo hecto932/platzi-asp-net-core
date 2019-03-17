@@ -8,10 +8,11 @@ namespace platzi_asp_net_core.Controllers
     {
         public IActionResult Index() {
             var school = new School();
+            
             school.foundationYear = 2005;
             school.SchoolId = Guid.NewGuid().ToString();
             school.Name = "Platzi";
-            
+
             return View(school);
         }
     }
