@@ -13,7 +13,7 @@ namespace platzi_asp_net_core.Controllers
       var modelToView = new Student
       {
         Name = "Pepe Perez",
-        UniqueId = Guid.NewGuid().ToString()
+        Id = Guid.NewGuid().ToString()
       };
 
       return View(modelToView);
@@ -39,7 +39,7 @@ namespace platzi_asp_net_core.Controllers
                          from a1 in lastname
                          select new Student { Name = $"{n1} {n2} {a1}" };
 
-      return studentList.OrderBy((student) => student.UniqueId).ToList();
+      return studentList.OrderBy((student) => student.Id).ToList();
     }
   }
 }

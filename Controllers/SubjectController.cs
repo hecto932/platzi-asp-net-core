@@ -11,7 +11,7 @@ namespace platzi_asp_net_core.Controllers
     {
       var modelToView = new Subject{
         Name="Programación",
-        UniqueId = Guid.NewGuid().ToString()
+        Id = Guid.NewGuid().ToString()
       };
 
       return View(modelToView);
@@ -21,19 +21,19 @@ namespace platzi_asp_net_core.Controllers
       var listSubjects = new List<Subject>(){
         new Subject{
           Name="Matemáticas",
-          UniqueId = Guid.NewGuid().ToString()
+          Id = Guid.NewGuid().ToString()
         } ,
         new Subject{
           Name="Educación Física",
-          UniqueId = Guid.NewGuid().ToString()
+          Id = Guid.NewGuid().ToString()
         },
         new Subject{
           Name="Castellano",
-          UniqueId = Guid.NewGuid().ToString()
+          Id = Guid.NewGuid().ToString()
         },
         new Subject{
           Name="Ciencias Naturales",
-          UniqueId = Guid.NewGuid().ToString()
+          Id = Guid.NewGuid().ToString()
         }
       };
 
