@@ -8,23 +8,6 @@
 <h1>@ViewData["Title"]</h1>
 
 <strong>From the partial view</strong>
-
-<table calss="table table-dark table-hover table-sm">
-  <thead>
-    <tr>
-      <th scope="col">UniqueId</th>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach(var student in Model)
-    {
-      <tr>
-        <td>@student.UniqueId</td>
-        <td>@student.Name</td>
-      </tr>
-    }
-  </tbody>
-</table>
+<partial name="ListSchoolObjects" />
 
 <p><i>@ViewBag.Date</i></p>

@@ -9,9 +9,6 @@
 
 <strong>From the partial view</strong>
 
-@foreach(var subject in Model)
-{
-  <partial name="SchoolObjectSimple" model="subject" />
-}
+<partial name="ListSchoolObjects" />
 
 <p><i>@ViewBag.Date</i></p>

@@ -35,3 +35,4 @@ c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\S
 c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Shared\SchoolObjectSimple.g.cshtml.cs
 c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Student\Index.g.cshtml.cs
 c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Student\MultiStudents.g.cshtml.cs
+c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Shared\ListSchoolObjects.g.cshtml.cs
