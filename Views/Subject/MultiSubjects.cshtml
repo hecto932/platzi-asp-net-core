@@ -1,4 +1,4 @@
-﻿@model Subject
+﻿@model List<Subject>
 
 @{
     ViewData["Title"] = "Subcjet information";
@@ -6,14 +6,12 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<strong>From the main view</strong>
-<p>
-  Name: @Model.Name
-  <br />
-  UniqueId: @Model.UniqueId
-</p>
 
 <strong>From the partial view</strong>
-<partial name="SimpleSubject" />
+
+@foreach(var subject in Model)
+{
+  <partial name="SimpleSubject" model="subject" />
+}
 
 <p><i>@ViewBag.Date</i></p>

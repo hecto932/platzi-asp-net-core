@@ -31,3 +31,5 @@ C:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\platzi-asp-ne
 C:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\platzi-asp-net-core.csproj.CopyComplete
 c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Simple.g.cshtml.cs
 c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Subject\Index.g.cshtml.cs
+c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Shared\SimpleSubject.g.cshtml.cs
+c:\Users\Hector\platzi\platzi-asp-net-core\obj\Debug\netcoreapp2.2\Razor\Views\Subject\MultiSubjects.g.cshtml.cs
