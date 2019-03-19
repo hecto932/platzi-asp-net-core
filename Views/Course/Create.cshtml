@@ -6,7 +6,8 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<h2>@ViewBag.extraMessage</h2>
+<div asp-validation-summary="All"></div>
 <form method="post">
   <div>
     <label asp-for="Name">Name</label>
@@ -18,7 +19,12 @@
   </div>
   <div>
     <label asp-for="typeWorkDay">typeWorkDay</label>
-    <input asp-for="typeWorkDay" />
+    @Html.DropDownList(
+      "typeWorkDay",
+      Html.GetEnumSelectList<TypeWorkDay>(),
+      "Select",
+      new {@class = "form-control"}
+    )
   </div>
   <input type="submit" />
 </form>
