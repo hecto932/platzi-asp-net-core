@@ -5,6 +5,8 @@ namespace platzi_asp_net_core.Models
 {
   public class Student: ObjSchoolBase
   {
-    public List<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
+    public List<Evaluation> Evaluations { get; set; }
+    public string CourseId { get; set; }
+    public Course Course { get; set; }
   }
 }

@@ -19,16 +19,21 @@ namespace platzi_asp_net_core.Models
     public School(string name, int year) => (Name, foundationYear) = (name, year);
 
 
-    public School(string name, int year,
-                   TypeSchool typeSchool,
-                   string country = "", string city = "") : base()
+    public School(
+      string name,
+      int year,
+      TypeSchool typeSchool,
+      string country = "",
+      string city = ""
+    ) : base()
     {
       (Name, foundationYear) = (name, year);
       Country = country;
       City = City;
     }
 
-    public School () {
+    public School()
+    {
 
     }
 
