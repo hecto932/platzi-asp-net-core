@@ -86,12 +86,13 @@ namespace platzi_asp_net_core.Models
             Id = Guid.NewGuid().ToString(),
             SchoolId = school.Id,
             Name = "101",
-            typeWorkDay =  TypeWorkDay.Morning
+            typeWorkDay =  TypeWorkDay.Morning,
+            Address = "Av. Siempre viva"
             },
-        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "201", typeWorkDay =  TypeWorkDay.Morning },
-        new Course   {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "301", typeWorkDay =  TypeWorkDay.Morning },
-        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "401", typeWorkDay =  TypeWorkDay.Afternoon },
-        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "501", typeWorkDay =  TypeWorkDay.Afternoon }
+        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "201", typeWorkDay =  TypeWorkDay.Morning, Address = "Av. Siempre viva" },
+        new Course   {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "301", typeWorkDay =  TypeWorkDay.Morning, Address = "Av. Siempre viva" },
+        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "401", typeWorkDay =  TypeWorkDay.Afternoon, Address = "Av. Siempre viva" },
+        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "501", typeWorkDay =  TypeWorkDay.Afternoon, Address = "Av. Siempre viva" }
       };
     }
 
