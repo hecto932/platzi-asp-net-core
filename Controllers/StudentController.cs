@@ -8,14 +8,19 @@ namespace platzi_asp_net_core.Controllers
 {
   public class StudentController : Controller
   {
-    public IActionResult Index()
-    {
-      return View(_context.Students);
-    }
-    public IActionResult MultiStudents()
+    // [Route("Student/Index")]
+    // [Route("Student/Index/{studentId}")]
+    public IActionResult Index(string id)
     {
       ViewBag.dynamicThing = "La Monja";
       ViewBag.Date = DateTime.Now;
+
+      if (!string.IsNullOrWhiteSpace(id)) {
+        var student = from s in _context.Students
+                      where s.Id == id
+                      select s;
+        return View(student.SingleOrDefault());
+      }
 
       return View("MultiStudents", _context.Students);
     }
