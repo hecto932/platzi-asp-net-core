@@ -8,10 +8,21 @@ namespace platzi_asp_net_core.Controllers
 {
   public class SubjectController : Controller
   {
-    public IActionResult Index()
+    [Route("Subject/Index")]
+    [Route("Subject/Index/{subjectId}")]
+    public IActionResult Index(string subjectId)
     {
-      return View(_context.Subjects.FirstOrDefault());
+      if (!string.IsNullOrWhiteSpace(subjectId))
+      {
+        var subject = from sub in _context.Subjects
+                      where sub.Id == subjectId
+                      select sub;
+        return View(subject.SingleOrDefault());
+      }
+
+      return View("MultiSubjects", _context.Subjects);
     }
+
     public IActionResult MultiSubjects()
     {
       ViewBag.dynamicThing = "La Monja";
@@ -21,7 +32,8 @@ namespace platzi_asp_net_core.Controllers
     }
 
     private SchoolContext _context;
-    public SubjectController(SchoolContext context) {
+    public SubjectController(SchoolContext context)
+    {
       _context = context;
     }
   }
