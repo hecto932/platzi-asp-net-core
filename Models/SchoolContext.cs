@@ -31,37 +31,71 @@ namespace platzi_asp_net_core.Models
       school.Address = "Carrera 1";
       school.TypeSchool = TypeSchool.Secondary;
 
+      // Upload schoolCourses
+      var courses = uploadCourses(school);
+
+      // upload subjects by courses
+      var subjects = uploadSubjects(courses);
+
+      // upload students by courses
+      var students = uploadStudents(courses);
+
       modelBuilder.Entity<School>().HasData(school);
-
-      modelBuilder.Entity<Subject>().HasData(
-        new Subject
-        {
-          Name = "Matemáticas",
-          Id = Guid.NewGuid().ToString()
-        },
-        new Subject
-        {
-          Name = "Educación Física",
-          Id = Guid.NewGuid().ToString()
-        },
-        new Subject
-        {
-          Name = "Castellano",
-          Id = Guid.NewGuid().ToString()
-        },
-        new Subject
-        {
-          Name = "Ciencias Naturales",
-          Id = Guid.NewGuid().ToString()
-        }
-      );
-
-      modelBuilder.Entity<Student>().HasData(
-        GenerarAlumnosAlAzar().ToArray()
-      );
+      modelBuilder.Entity<Course>().HasData(courses.ToArray());
+      modelBuilder.Entity<Subject>().HasData(subjects.ToArray());
+      modelBuilder.Entity<Student>().HasData(students.ToArray());
     }
 
-    private List<Student> GenerarAlumnosAlAzar()
+    private List<Student> uploadStudents(List<Course> cursos)
+    {
+      var listaAlumnos = new List<Student>();
+
+      Random rnd = new Random();
+      foreach (var curso in cursos)
+      {
+        int cantRandom = rnd.Next(5, 20);
+        var tmplist = GenerarAlumnosAlAzar(curso, cantRandom);
+        listaAlumnos.AddRange(tmplist);
+      }
+      return listaAlumnos;
+    }
+
+    private static List<Subject> uploadSubjects(List<Course> courses)
+    {
+      var completeList = new List<Subject>();
+      foreach (var course in courses)
+      {
+        var tmpList = new List<Subject>(){
+            new Subject{Id = Guid.NewGuid().ToString(), CourseId = course.Id, Name = "Matemáticas" },
+            new Subject{Id = Guid.NewGuid().ToString(), CourseId = course.Id, Name = "Educación Física" },
+            new Subject{Id = Guid.NewGuid().ToString(), CourseId = course.Id, Name = "Castellano" },
+            new Subject{Id = Guid.NewGuid().ToString(), CourseId = course.Id, Name = "Ciencias Naturales" },
+            new Subject{Id = Guid.NewGuid().ToString(), CourseId = course.Id, Name = "Programación" }
+          };
+        completeList.AddRange(tmpList);
+        // course.Subjects = tmpList;
+      }
+
+      return completeList;
+    }
+
+    private static List<Course> uploadCourses(School school)
+    {
+      return new List<Course>(){
+        new Course() {
+            Id = Guid.NewGuid().ToString(),
+            SchoolId = school.Id,
+            Name = "101",
+            typeWorkDay =  TypeWorkDay.Morning
+            },
+        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "201", typeWorkDay =  TypeWorkDay.Morning },
+        new Course   {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "301", typeWorkDay =  TypeWorkDay.Morning },
+        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "401", typeWorkDay =  TypeWorkDay.Afternoon },
+        new Course() {Id = Guid.NewGuid().ToString(), SchoolId = school.Id, Name = "501", typeWorkDay =  TypeWorkDay.Afternoon }
+      };
+    }
+
+    private List<Student> GenerarAlumnosAlAzar(Course course, int count)
     {
       string[] name1 = { "Alba", "Felipa", "Eusebio", "Farid", "Donald", "Alvaro", "Nicolás" };
       string[] lastname = { "Ruiz", "Sarmiento", "Uribe", "Maduro", "Trump", "Toledo", "Herrera" };
@@ -70,9 +104,14 @@ namespace platzi_asp_net_core.Models
       var studentList = from n1 in name1
                         from n2 in secondName
                         from a1 in lastname
-                        select new Student { Name = $"{n1} {n2} {a1}" };
+                        select new Student
+                        {
+                          Id = Guid.NewGuid().ToString(),
+                          Name = $"{n1} {n2} {a1}",
+                          CourseId = course.Id
+                        };
 
-      return studentList.OrderBy((student) => student.Id).ToList();
+      return studentList.OrderBy((student) => student.Id).Take(count).ToList();
     }
   }
 }
