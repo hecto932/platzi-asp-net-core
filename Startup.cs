@@ -36,8 +36,16 @@ namespace platzi_asp_net_core
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // services.AddDbContext<SchoolContext>(
+            //     options => options.UseInMemoryDatabase(databaseName: "testDB")
+            // );
+
+            string connString = ConfigurationExtensions
+                                    .GetConnectionString(this.Configuration,
+                                        "DefaultConnection"
+                                    );
             services.AddDbContext<SchoolContext>(
-                options => options.UseInMemoryDatabase(databaseName: "testDB")
+                options => options.UseSqlServer(connString)
             );
         }
 
