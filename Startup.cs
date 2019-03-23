@@ -42,7 +42,7 @@ namespace platzi_asp_net_core
 
             string connString = ConfigurationExtensions
                                     .GetConnectionString(this.Configuration,
-                                        "DefaultConnection"
+                                        "DefaultConnectionString"
                                     );
             services.AddDbContext<SchoolContext>(
                 options => options.UseSqlServer(connString)
