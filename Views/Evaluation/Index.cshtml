@@ -1,4 +1,4 @@
-@model IEnumerable<platzi_asp_net_core.Models.Subject>
+@model IEnumerable<platzi_asp_net_core.Models.Evaluation>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Course)
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -25,7 +31,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Course.Id)
+                @Html.DisplayFor(modelItem => item.Student.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Points)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

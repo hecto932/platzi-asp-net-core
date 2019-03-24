@@ -9,22 +9,23 @@ using platzi_asp_net_core.Models;
 
 namespace platzi_asp_net_core.Controllers
 {
-    public class SchoolController : Controller
+    public class EvaluationController : Controller
     {
         private readonly SchoolContext _context;
 
-        public SchoolController(SchoolContext context)
+        public EvaluationController(SchoolContext context)
         {
             _context = context;
         }
 
-        // GET: School
+        // GET: Evaluation
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Schools.ToListAsync());
+            var schoolContext = _context.Evaluations.Include(e => e.Student).Include(e => e.Subject);
+            return View(await schoolContext.ToListAsync());
         }
 
-        // GET: School/Details/5
+        // GET: Evaluation/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -32,39 +33,45 @@ namespace platzi_asp_net_core.Controllers
                 return NotFound();
             }
 
-            var school = await _context.Schools
+            var evaluation = await _context.Evaluations
+                .Include(e => e.Student)
+                .Include(e => e.Subject)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (school == null)
+            if (evaluation == null)
             {
                 return NotFound();
             }
 
-            return View(school);
+            return View(evaluation);
         }
 
-        // GET: School/Create
+        // GET: Evaluation/Create
         public IActionResult Create()
         {
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id");
+            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id");
             return View();
         }
 
-        // POST: School/Create
+        // POST: Evaluation/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("foundationYear,Country,City,Address,TypeSchool,Id,Name")] School school)
+        public async Task<IActionResult> Create([Bind("StudentId,SubjectId,Points,Id,Name")] Evaluation evaluation)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(school);
+                _context.Add(evaluation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(school);
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", evaluation.StudentId);
+            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id", evaluation.SubjectId);
+            return View(evaluation);
         }
 
-        // GET: School/Edit/5
+        // GET: Evaluation/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -72,22 +79,24 @@ namespace platzi_asp_net_core.Controllers
                 return NotFound();
             }
 
-            var school = await _context.Schools.FindAsync(id);
-            if (school == null)
+            var evaluation = await _context.Evaluations.FindAsync(id);
+            if (evaluation == null)
             {
                 return NotFound();
             }
-            return View(school);
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", evaluation.StudentId);
+            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id", evaluation.SubjectId);
+            return View(evaluation);
         }
 
-        // POST: School/Edit/5
+        // POST: Evaluation/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("foundationYear,Country,City,Address,TypeSchool,Id,Name")] School school)
+        public async Task<IActionResult> Edit(string id, [Bind("StudentId,SubjectId,Points,Id,Name")] Evaluation evaluation)
         {
-            if (id != school.Id)
+            if (id != evaluation.Id)
             {
                 return NotFound();
             }
@@ -96,12 +105,12 @@ namespace platzi_asp_net_core.Controllers
             {
                 try
                 {
-                    _context.Update(school);
+                    _context.Update(evaluation);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SchoolExists(school.Id))
+                    if (!EvaluationExists(evaluation.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +121,12 @@ namespace platzi_asp_net_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(school);
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", evaluation.StudentId);
+            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id", evaluation.SubjectId);
+            return View(evaluation);
         }
 
-        // GET: School/Delete/5
+        // GET: Evaluation/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -123,30 +134,32 @@ namespace platzi_asp_net_core.Controllers
                 return NotFound();
             }
 
-            var school = await _context.Schools
+            var evaluation = await _context.Evaluations
+                .Include(e => e.Student)
+                .Include(e => e.Subject)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (school == null)
+            if (evaluation == null)
             {
                 return NotFound();
             }
 
-            return View(school);
+            return View(evaluation);
         }
 
-        // POST: School/Delete/5
+        // POST: Evaluation/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var school = await _context.Schools.FindAsync(id);
-            _context.Schools.Remove(school);
+            var evaluation = await _context.Evaluations.FindAsync(id);
+            _context.Evaluations.Remove(evaluation);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SchoolExists(string id)
+        private bool EvaluationExists(string id)
         {
-            return _context.Schools.Any(e => e.Id == id);
+            return _context.Evaluations.Any(e => e.Id == id);
         }
     }
 }

@@ -1,20 +1,65 @@
-﻿@model School
+@model IEnumerable<platzi_asp_net_core.Models.School>
 
-<!-- Codigo CSHARP -->
 @{
-    ViewData["Title"] = "School information";
-    Layout = "Simple";
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-  <h1 class="display-4">@ViewData["Title"]</h1>
-  <h2>Name: @Model.Name</h2>
-  <h3>TypeSchool: @Model.TypeSchool</h3>
-  <address>
-    <p>Address: @Model.Address</p>
-    <p>Country: @Model.Country</p>
-    <p>City: @Model.City</p>
-  </address>
-  <p><strong>foundation year: @Model.foundationYear</strong> </p>
-  <p>@ViewBag.dynamicThing</p>
-</div>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.foundationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeSchool)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.foundationYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeSchool)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
